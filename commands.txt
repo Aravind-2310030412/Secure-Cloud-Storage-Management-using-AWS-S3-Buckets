@@ -1,0 +1,30 @@
+
+AWS CLI Commands
+
+STEP 1: Configure AWS CLI
+aws configure
+
+STEP 2: Create S3 Buckets
+aws s3 mb s3://my-first-s3-bucket-1806
+aws s3 mb s3://my-second-s3-bucket-1806
+
+STEP 3: Verify Buckets
+aws s3 ls
+
+STEP 4: Block Public Access (Security)
+aws s3api put-public-access-block --bucket my-first-s3-bucket-1806 --public-access-block-configuration BlockPublicAcls=true,IgnorePublicAcls=true,BlockPublicPolicy=true,RestrictPublicBuckets=true
+
+STEP 5: Enable Versioning
+aws s3api put-bucket-versioning --bucket my-first-s3-bucket-1806 --versioning-configuration Status=Enabled
+
+STEP 6: Delete Second Bucket
+aws s3 rb s3://my-second-s3-bucket-1806
+
+STEP 7: Suspend Versioning (to allow deletion)
+aws s3api put-bucket-versioning --bucket my-first-s3-bucket-1806 --versioning-configuration Status=Suspended
+
+STEP 8: Delete First Bucket
+aws s3 rb s3://my-first-s3-bucket-1806
+
+STEP 9: Final Verification
+aws s3 ls
